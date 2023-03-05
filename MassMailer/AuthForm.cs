@@ -18,15 +18,15 @@ namespace MassMailer
         {
             switch (SMTPBrains.Auth(textBox_Login.Text, textBox_Password.Text))
             {
-                case "wrongCredentials":
+                case 1: // wrongCredentials
                     label_Errors.Text = "Неправильный логин или пароль!";
                     LabelErrorsShowAndHide();
                     break;
-                case "badInternetConnection":
+                case 2: // badInternetConnection
                     label_Errors.Text = "Проверьте соединение с интернетом.";
                     LabelErrorsShowAndHide();
                     break;
-                case "success":
+                case 0: // success
                     if (Properties.Settings.Default.RememberChecked)
                     {
                         Properties.Settings.Default.Login = textBox_Login.Text;
@@ -35,6 +35,7 @@ namespace MassMailer
                     }
                     Hide();
                     new MainForm().ShowDialog();
+                    SMTPBrains.Disconnect();
                     Close();
                     break;
             }

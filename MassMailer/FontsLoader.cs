@@ -10,7 +10,7 @@ namespace MassMailer
         private static extern int AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, out uint pcFonts);
 
         public static PrivateFontCollection pfc = new PrivateFontCollection();
-        public static void Initialize()
+        public FontsLoader()
         {
             byte[] fontData = Convert.FromBase64String(Properties.Resources.HSESans_Black);
             IntPtr fontPtr = Marshal.AllocHGlobal(fontData.Length);

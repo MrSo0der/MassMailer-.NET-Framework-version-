@@ -127,6 +127,7 @@ namespace MassMailer
             // 
             // button_AttachFiles
             // 
+            this.button_AttachFiles.AllowDrop = true;
             this.button_AttachFiles.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_AttachFiles.Image = ((System.Drawing.Image)(resources.GetObject("button_AttachFiles.Image")));
             this.button_AttachFiles.Location = new System.Drawing.Point(184, 2);
@@ -136,6 +137,8 @@ namespace MassMailer
             this.button_AttachFiles.TabIndex = 13;
             this.button_AttachFiles.UseVisualStyleBackColor = true;
             this.button_AttachFiles.Click += new System.EventHandler(this.button_AttachFiles_Click);
+            this.button_AttachFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.comboBoxAndButton_Files_DragDrop);
+            this.button_AttachFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.comboBoxAndButton_Files_DragEnter);
             // 
             // label_Status
             // 
@@ -147,12 +150,12 @@ namespace MassMailer
             this.label_Status.Name = "label_Status";
             this.label_Status.Size = new System.Drawing.Size(396, 37);
             this.label_Status.TabIndex = 4;
-            this.label_Status.Text = "\r\n";
             this.label_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label_Status.Visible = false;
             // 
             // comboBox_Files
             // 
+            this.comboBox_Files.AllowDrop = true;
             this.comboBox_Files.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_Files.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.comboBox_Files.FormattingEnabled = true;
@@ -163,6 +166,8 @@ namespace MassMailer
             this.comboBox_Files.TabIndex = 0;
             this.comboBox_Files.TabStop = false;
             this.comboBox_Files.SelectedIndexChanged += new System.EventHandler(this.comboBox_Files_SelectedIndexChanged);
+            this.comboBox_Files.DragDrop += new System.Windows.Forms.DragEventHandler(this.comboBoxAndButton_Files_DragDrop);
+            this.comboBox_Files.DragEnter += new System.Windows.Forms.DragEventHandler(this.comboBoxAndButton_Files_DragEnter);
             // 
             // button_AttachmentsClear
             // 
@@ -186,7 +191,7 @@ namespace MassMailer
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.95412F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tLP_Top.Controls.Add(this.textBox_Recipient, 0, 0);
             this.tLP_Top.Controls.Add(this.label_ToWhom, 0, 0);
             this.tLP_Top.Controls.Add(this.comboBox_Recipients, 3, 0);
@@ -203,14 +208,19 @@ namespace MassMailer
             // 
             // textBox_Recipient
             // 
-            this.textBox_Recipient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_Recipient.AllowDrop = true;
+            this.textBox_Recipient.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox_Recipient.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.textBox_Recipient.Location = new System.Drawing.Point(73, 2);
             this.textBox_Recipient.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Recipient.Multiline = true;
             this.textBox_Recipient.Name = "textBox_Recipient";
-            this.textBox_Recipient.Size = new System.Drawing.Size(417, 36);
+            this.textBox_Recipient.Size = new System.Drawing.Size(416, 36);
             this.textBox_Recipient.TabIndex = 1;
             this.textBox_Recipient.TextChanged += new System.EventHandler(this.textBox_Recipient_TextChanged);
+            this.textBox_Recipient.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
+            this.textBox_Recipient.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
+            this.textBox_Recipient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Recipient_KeyDown);
             // 
             // label_ToWhom
             // 
@@ -227,36 +237,42 @@ namespace MassMailer
             // 
             // comboBox_Recipients
             // 
+            this.comboBox_Recipients.AllowDrop = true;
             this.comboBox_Recipients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_Recipients.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.comboBox_Recipients.FormattingEnabled = true;
-            this.comboBox_Recipients.Location = new System.Drawing.Point(527, 2);
+            this.comboBox_Recipients.Location = new System.Drawing.Point(526, 2);
             this.comboBox_Recipients.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Recipients.Name = "comboBox_Recipients";
-            this.comboBox_Recipients.Size = new System.Drawing.Size(340, 38);
+            this.comboBox_Recipients.Size = new System.Drawing.Size(338, 38);
             this.comboBox_Recipients.TabIndex = 0;
             this.comboBox_Recipients.TabStop = false;
             this.comboBox_Recipients.SelectedIndexChanged += new System.EventHandler(this.comboBox_Recipients_SelectedIndexChanged);
+            this.comboBox_Recipients.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
+            this.comboBox_Recipients.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
             // 
             // button_RecipientsFile
             // 
+            this.button_RecipientsFile.AllowDrop = true;
             this.button_RecipientsFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_RecipientsFile.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.button_RecipientsFile.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsFile.Image")));
-            this.button_RecipientsFile.Location = new System.Drawing.Point(904, 2);
+            this.button_RecipientsFile.Location = new System.Drawing.Point(901, 2);
             this.button_RecipientsFile.Margin = new System.Windows.Forms.Padding(2);
             this.button_RecipientsFile.Name = "button_RecipientsFile";
             this.button_RecipientsFile.Size = new System.Drawing.Size(36, 37);
             this.button_RecipientsFile.TabIndex = 2;
             this.button_RecipientsFile.UseVisualStyleBackColor = true;
             this.button_RecipientsFile.Click += new System.EventHandler(this.button_RecipientsFile_Click);
+            this.button_RecipientsFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
+            this.button_RecipientsFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
             // 
             // button_RecipientsClear
             // 
             this.button_RecipientsClear.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_RecipientsClear.Enabled = false;
             this.button_RecipientsClear.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsClear.Image")));
-            this.button_RecipientsClear.Location = new System.Drawing.Point(944, 2);
+            this.button_RecipientsClear.Location = new System.Drawing.Point(941, 2);
             this.button_RecipientsClear.Margin = new System.Windows.Forms.Padding(2);
             this.button_RecipientsClear.Name = "button_RecipientsClear";
             this.button_RecipientsClear.Size = new System.Drawing.Size(37, 37);
@@ -295,6 +311,7 @@ namespace MassMailer
             // 
             // textBox_Topic
             // 
+            this.textBox_Topic.AllowDrop = true;
             this.textBox_Topic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox_Topic.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.textBox_Topic.Location = new System.Drawing.Point(73, 2);
@@ -302,6 +319,8 @@ namespace MassMailer
             this.textBox_Topic.Name = "textBox_Topic";
             this.textBox_Topic.Size = new System.Drawing.Size(911, 36);
             this.textBox_Topic.TabIndex = 4;
+            this.textBox_Topic.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragDrop);
+            this.textBox_Topic.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragEnter);
             // 
             // tLP_html
             // 
@@ -331,6 +350,7 @@ namespace MassMailer
             // 
             // button_HTMLFile
             // 
+            this.button_HTMLFile.AllowDrop = true;
             this.button_HTMLFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_HTMLFile.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.button_HTMLFile.Image = ((System.Drawing.Image)(resources.GetObject("button_HTMLFile.Image")));
@@ -341,6 +361,8 @@ namespace MassMailer
             this.button_HTMLFile.TabIndex = 5;
             this.button_HTMLFile.UseVisualStyleBackColor = true;
             this.button_HTMLFile.Click += new System.EventHandler(this.button_HTMLFile_Click);
+            this.button_HTMLFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.button_HTMLFile_DragDrop);
+            this.button_HTMLFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.button_HTMLFile_DragEnter);
             // 
             // button_HTMLClear
             // 
@@ -356,6 +378,7 @@ namespace MassMailer
             // 
             // button_CSVFile
             // 
+            this.button_CSVFile.AllowDrop = true;
             this.button_CSVFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_CSVFile.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.button_CSVFile.Image = ((System.Drawing.Image)(resources.GetObject("button_CSVFile.Image")));
@@ -366,6 +389,8 @@ namespace MassMailer
             this.button_CSVFile.TabIndex = 8;
             this.button_CSVFile.UseVisualStyleBackColor = true;
             this.button_CSVFile.Click += new System.EventHandler(this.button_CSVFile_Click);
+            this.button_CSVFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.button_CSVFile_DragDrop);
+            this.button_CSVFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.button_CSVFile_DragEnter);
             // 
             // button_HTMLView
             // 
@@ -411,6 +436,7 @@ namespace MassMailer
             this.textBox_MessageText.AllowDrop = true;
             this.textBox_MessageText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_MessageText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_MessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.89076F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox_MessageText.Location = new System.Drawing.Point(20, 143);
             this.textBox_MessageText.Multiline = true;
             this.textBox_MessageText.Name = "textBox_MessageText";
@@ -420,7 +446,6 @@ namespace MassMailer
             this.textBox_MessageText.TextChanged += new System.EventHandler(this.textBox_MessageText_TextChanged);
             this.textBox_MessageText.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_MessageText_DragDrop);
             this.textBox_MessageText.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_MessageText_DragEnter);
-            this.textBox_MessageText.DragLeave += new System.EventHandler(this.textBox_MessageText_DragLeave);
             // 
             // MainForm
             // 
@@ -432,7 +457,7 @@ namespace MassMailer
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(860, 629);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MassMailer: Plain Text Mode";
             this.tLP_Main.ResumeLayout(false);
             this.tLP_Main.PerformLayout();

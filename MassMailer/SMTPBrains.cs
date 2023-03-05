@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Windows.Forms;
 using HandlebarsDotNet;
+using System;
 
 namespace MassMailer
 {
@@ -16,7 +17,7 @@ namespace MassMailer
         private static List<Dictionary<string, string>> userList;
         private static int usersCount = 0;
 
-        public static string Auth(string login, string password)
+        public static short Auth(string login, string password)
         {
             try
             {
@@ -28,15 +29,15 @@ namespace MassMailer
                 //"MrSo0der@yandex.ru", "iqzxcnyanqfqobaq"
                 client.Authenticate(login, password);
                 loginEmail = login;
-                return "success";
+                return 0; // success
             }
             catch (MailKit.Security.AuthenticationException)
             {
-                return "wrongCredentials";
+                return 1; // wrongCredentials
             }
             catch (SocketException)
             {
-                return "badInternetConnection";
+                return 2; // badInternetConnection
             }
         }
 
@@ -51,9 +52,16 @@ namespace MassMailer
                 {
                     string[] fields = reader.ReadLine().Split(',');
                     Dictionary<string, string> user = new Dictionary<string, string>();
-                    for (int i = 0; i < headers.Length; i++)
+                    try
                     {
-                        user.Add(headers[i], fields[i]);
+                        for (int i = 0; i < headers.Length; i++)
+                        {
+                            user.Add(headers[i], fields[i]);
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        return -1;
                     }
                     userList.Add(user);
                 }
@@ -61,7 +69,7 @@ namespace MassMailer
             usersCount = userList.Count;
             return usersCount;
         }
-        public static string Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, string Mode, string CSVData)
+        public static short Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, short Mode, string CSVData)
         {
             var builder = new BodyBuilder();
             try
@@ -73,7 +81,7 @@ namespace MassMailer
             }
             catch (IOException)
             {
-                return "filesOpened";
+                return 3;
             }
             MimeMessage message = new MimeMessage();
             message.From.Add(new MailboxAddress(loginEmail, loginEmail));
@@ -81,14 +89,14 @@ namespace MassMailer
 
             switch (Mode)
             {
-                case "Plain":
+                case 0:
                     builder.TextBody = MessageText;
-                    goto case "_StaticPlain";
-                case "Static":
+                    goto case 10;
+                case 1:
                     builder.HtmlBody = MessageText;
-                    goto case "_StaticPlain";
+                    goto case 10;
 
-                case "_StaticPlain":
+                case 10:
                     foreach (var address in Recipients)
                     {
                         string a = address.ToString(); message.To.Add(new MailboxAddress(a, a));
@@ -100,11 +108,11 @@ namespace MassMailer
                     }
                     catch (SmtpCommandException)
                     {
-                        return "wrongAddress";
+                        return 2;
                     }
                     goto default;
 
-                case "Dynamic":
+                case 2:
 
                     for (int i = 0; i < usersCount; i++)
                     {
@@ -118,13 +126,17 @@ namespace MassMailer
                         }
                         catch (SmtpCommandException)
                         {
-                            return "wrongAddress";
+                            return 2;
                         }
                     }
                     goto default;
 
-                default: return "success";
+                default: return 0;
             }
+        }
+        public static void Disconnect()
+        {
+            client.Disconnect(true);
         }
     }
 }
