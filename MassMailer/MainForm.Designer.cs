@@ -45,7 +45,6 @@ namespace MassMailer
             this.comboBox_Recipients = new System.Windows.Forms.ComboBox();
             this.button_RecipientsFile = new System.Windows.Forms.Button();
             this.button_RecipientsClear = new System.Windows.Forms.Button();
-            this.richTextBox_MessageText = new System.Windows.Forms.RichTextBox();
             this.tLP_Middle = new System.Windows.Forms.TableLayoutPanel();
             this.label_Topic = new System.Windows.Forms.Label();
             this.textBox_Topic = new System.Windows.Forms.TextBox();
@@ -56,6 +55,7 @@ namespace MassMailer
             this.button_HTMLView = new System.Windows.Forms.Button();
             this.button_CSVView = new System.Windows.Forms.Button();
             this.button_CSVClear = new System.Windows.Forms.Button();
+            this.textBox_MessageText = new System.Windows.Forms.TextBox();
             this.tLP_Main.SuspendLayout();
             this.tLP_Bottom.SuspendLayout();
             this.tLP_Top.SuspendLayout();
@@ -69,9 +69,9 @@ namespace MassMailer
             this.tLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_Main.Controls.Add(this.tLP_Bottom, 0, 4);
             this.tLP_Main.Controls.Add(this.tLP_Top, 0, 0);
-            this.tLP_Main.Controls.Add(this.richTextBox_MessageText, 0, 3);
             this.tLP_Main.Controls.Add(this.tLP_Middle, 0, 1);
             this.tLP_Main.Controls.Add(this.tLP_html, 0, 2);
+            this.tLP_Main.Controls.Add(this.textBox_MessageText, 0, 3);
             this.tLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tLP_Main.Location = new System.Drawing.Point(0, 0);
             this.tLP_Main.Margin = new System.Windows.Forms.Padding(0);
@@ -109,7 +109,7 @@ namespace MassMailer
             this.tLP_Bottom.RowCount = 1;
             this.tLP_Bottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_Bottom.Size = new System.Drawing.Size(986, 41);
-            this.tLP_Bottom.TabIndex = 7;
+            this.tLP_Bottom.TabIndex = 4;
             // 
             // button_Send
             // 
@@ -120,7 +120,7 @@ namespace MassMailer
             this.button_Send.Margin = new System.Windows.Forms.Padding(2);
             this.button_Send.Name = "button_Send";
             this.button_Send.Size = new System.Drawing.Size(144, 37);
-            this.button_Send.TabIndex = 1;
+            this.button_Send.TabIndex = 12;
             this.button_Send.Text = "Отправить";
             this.button_Send.UseVisualStyleBackColor = true;
             this.button_Send.Click += new System.EventHandler(this.button_Send_Click);
@@ -133,7 +133,7 @@ namespace MassMailer
             this.button_AttachFiles.Margin = new System.Windows.Forms.Padding(2);
             this.button_AttachFiles.Name = "button_AttachFiles";
             this.button_AttachFiles.Size = new System.Drawing.Size(36, 37);
-            this.button_AttachFiles.TabIndex = 2;
+            this.button_AttachFiles.TabIndex = 13;
             this.button_AttachFiles.UseVisualStyleBackColor = true;
             this.button_AttachFiles.Click += new System.EventHandler(this.button_AttachFiles_Click);
             // 
@@ -160,18 +160,20 @@ namespace MassMailer
             this.comboBox_Files.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Files.Name = "comboBox_Files";
             this.comboBox_Files.Size = new System.Drawing.Size(287, 38);
-            this.comboBox_Files.TabIndex = 3;
+            this.comboBox_Files.TabIndex = 0;
+            this.comboBox_Files.TabStop = false;
             this.comboBox_Files.SelectedIndexChanged += new System.EventHandler(this.comboBox_Files_SelectedIndexChanged);
             // 
             // button_AttachmentsClear
             // 
             this.button_AttachmentsClear.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_AttachmentsClear.Enabled = false;
             this.button_AttachmentsClear.Image = ((System.Drawing.Image)(resources.GetObject("button_AttachmentsClear.Image")));
             this.button_AttachmentsClear.Location = new System.Drawing.Point(224, 2);
             this.button_AttachmentsClear.Margin = new System.Windows.Forms.Padding(2);
             this.button_AttachmentsClear.Name = "button_AttachmentsClear";
             this.button_AttachmentsClear.Size = new System.Drawing.Size(36, 37);
-            this.button_AttachmentsClear.TabIndex = 5;
+            this.button_AttachmentsClear.TabIndex = 14;
             this.button_AttachmentsClear.UseVisualStyleBackColor = true;
             this.button_AttachmentsClear.Click += new System.EventHandler(this.button_AttachmentsClear_Click);
             // 
@@ -184,7 +186,7 @@ namespace MassMailer
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.95412F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tLP_Top.Controls.Add(this.textBox_Recipient, 0, 0);
             this.tLP_Top.Controls.Add(this.label_ToWhom, 0, 0);
             this.tLP_Top.Controls.Add(this.comboBox_Recipients, 3, 0);
@@ -197,7 +199,7 @@ namespace MassMailer
             this.tLP_Top.RowCount = 1;
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_Top.Size = new System.Drawing.Size(986, 41);
-            this.tLP_Top.TabIndex = 6;
+            this.tLP_Top.TabIndex = 0;
             // 
             // textBox_Recipient
             // 
@@ -206,8 +208,8 @@ namespace MassMailer
             this.textBox_Recipient.Location = new System.Drawing.Point(73, 2);
             this.textBox_Recipient.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Recipient.Name = "textBox_Recipient";
-            this.textBox_Recipient.Size = new System.Drawing.Size(416, 36);
-            this.textBox_Recipient.TabIndex = 2;
+            this.textBox_Recipient.Size = new System.Drawing.Size(417, 36);
+            this.textBox_Recipient.TabIndex = 1;
             this.textBox_Recipient.TextChanged += new System.EventHandler(this.textBox_Recipient_TextChanged);
             // 
             // label_ToWhom
@@ -219,7 +221,7 @@ namespace MassMailer
             this.label_ToWhom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_ToWhom.Name = "label_ToWhom";
             this.label_ToWhom.Size = new System.Drawing.Size(67, 41);
-            this.label_ToWhom.TabIndex = 1;
+            this.label_ToWhom.TabIndex = 0;
             this.label_ToWhom.Text = "Кому:";
             this.label_ToWhom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -228,11 +230,12 @@ namespace MassMailer
             this.comboBox_Recipients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_Recipients.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.comboBox_Recipients.FormattingEnabled = true;
-            this.comboBox_Recipients.Location = new System.Drawing.Point(526, 2);
+            this.comboBox_Recipients.Location = new System.Drawing.Point(527, 2);
             this.comboBox_Recipients.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Recipients.Name = "comboBox_Recipients";
-            this.comboBox_Recipients.Size = new System.Drawing.Size(338, 38);
-            this.comboBox_Recipients.TabIndex = 3;
+            this.comboBox_Recipients.Size = new System.Drawing.Size(340, 38);
+            this.comboBox_Recipients.TabIndex = 0;
+            this.comboBox_Recipients.TabStop = false;
             this.comboBox_Recipients.SelectedIndexChanged += new System.EventHandler(this.comboBox_Recipients_SelectedIndexChanged);
             // 
             // button_RecipientsFile
@@ -240,35 +243,26 @@ namespace MassMailer
             this.button_RecipientsFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_RecipientsFile.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.button_RecipientsFile.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsFile.Image")));
-            this.button_RecipientsFile.Location = new System.Drawing.Point(901, 2);
+            this.button_RecipientsFile.Location = new System.Drawing.Point(904, 2);
             this.button_RecipientsFile.Margin = new System.Windows.Forms.Padding(2);
             this.button_RecipientsFile.Name = "button_RecipientsFile";
             this.button_RecipientsFile.Size = new System.Drawing.Size(36, 37);
-            this.button_RecipientsFile.TabIndex = 4;
+            this.button_RecipientsFile.TabIndex = 2;
             this.button_RecipientsFile.UseVisualStyleBackColor = true;
             this.button_RecipientsFile.Click += new System.EventHandler(this.button_RecipientsFile_Click);
             // 
             // button_RecipientsClear
             // 
             this.button_RecipientsClear.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_RecipientsClear.Enabled = false;
             this.button_RecipientsClear.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsClear.Image")));
-            this.button_RecipientsClear.Location = new System.Drawing.Point(941, 2);
+            this.button_RecipientsClear.Location = new System.Drawing.Point(944, 2);
             this.button_RecipientsClear.Margin = new System.Windows.Forms.Padding(2);
             this.button_RecipientsClear.Name = "button_RecipientsClear";
             this.button_RecipientsClear.Size = new System.Drawing.Size(37, 37);
-            this.button_RecipientsClear.TabIndex = 5;
+            this.button_RecipientsClear.TabIndex = 3;
             this.button_RecipientsClear.UseVisualStyleBackColor = true;
             this.button_RecipientsClear.Click += new System.EventHandler(this.button_RecipientsClear_Click);
-            // 
-            // richTextBox_MessageText
-            // 
-            this.richTextBox_MessageText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox_MessageText.Location = new System.Drawing.Point(19, 142);
-            this.richTextBox_MessageText.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBox_MessageText.Name = "richTextBox_MessageText";
-            this.richTextBox_MessageText.Size = new System.Drawing.Size(982, 498);
-            this.richTextBox_MessageText.TabIndex = 2;
-            this.richTextBox_MessageText.Text = "";
             // 
             // tLP_Middle
             // 
@@ -284,7 +278,7 @@ namespace MassMailer
             this.tLP_Middle.RowCount = 1;
             this.tLP_Middle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_Middle.Size = new System.Drawing.Size(986, 41);
-            this.tLP_Middle.TabIndex = 4;
+            this.tLP_Middle.TabIndex = 1;
             // 
             // label_Topic
             // 
@@ -295,7 +289,7 @@ namespace MassMailer
             this.label_Topic.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_Topic.Name = "label_Topic";
             this.label_Topic.Size = new System.Drawing.Size(67, 41);
-            this.label_Topic.TabIndex = 2;
+            this.label_Topic.TabIndex = 0;
             this.label_Topic.Text = "Тема:";
             this.label_Topic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -307,11 +301,11 @@ namespace MassMailer
             this.textBox_Topic.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Topic.Name = "textBox_Topic";
             this.textBox_Topic.Size = new System.Drawing.Size(911, 36);
-            this.textBox_Topic.TabIndex = 3;
+            this.textBox_Topic.TabIndex = 4;
             // 
             // tLP_html
             // 
-            this.tLP_html.ColumnCount = 9;
+            this.tLP_html.ColumnCount = 8;
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -320,7 +314,6 @@ namespace MassMailer
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_html.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tLP_html.Controls.Add(this.button_HTMLFile, 0, 0);
             this.tLP_html.Controls.Add(this.button_HTMLClear, 2, 0);
             this.tLP_html.Controls.Add(this.button_CSVFile, 4, 0);
@@ -334,7 +327,7 @@ namespace MassMailer
             this.tLP_html.RowCount = 1;
             this.tLP_html.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_html.Size = new System.Drawing.Size(986, 41);
-            this.tLP_html.TabIndex = 8;
+            this.tLP_html.TabIndex = 2;
             // 
             // button_HTMLFile
             // 
@@ -345,12 +338,13 @@ namespace MassMailer
             this.button_HTMLFile.Margin = new System.Windows.Forms.Padding(2);
             this.button_HTMLFile.Name = "button_HTMLFile";
             this.button_HTMLFile.Size = new System.Drawing.Size(36, 37);
-            this.button_HTMLFile.TabIndex = 6;
+            this.button_HTMLFile.TabIndex = 5;
             this.button_HTMLFile.UseVisualStyleBackColor = true;
             this.button_HTMLFile.Click += new System.EventHandler(this.button_HTMLFile_Click);
             // 
             // button_HTMLClear
             // 
+            this.button_HTMLClear.Enabled = false;
             this.button_HTMLClear.Image = ((System.Drawing.Image)(resources.GetObject("button_HTMLClear.Image")));
             this.button_HTMLClear.Location = new System.Drawing.Point(82, 2);
             this.button_HTMLClear.Margin = new System.Windows.Forms.Padding(2);
@@ -369,24 +363,27 @@ namespace MassMailer
             this.button_CSVFile.Margin = new System.Windows.Forms.Padding(2);
             this.button_CSVFile.Name = "button_CSVFile";
             this.button_CSVFile.Size = new System.Drawing.Size(36, 37);
-            this.button_CSVFile.TabIndex = 5;
+            this.button_CSVFile.TabIndex = 8;
             this.button_CSVFile.UseVisualStyleBackColor = true;
             this.button_CSVFile.Click += new System.EventHandler(this.button_CSVFile_Click);
             // 
             // button_HTMLView
             // 
             this.button_HTMLView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_HTMLView.Enabled = false;
             this.button_HTMLView.Image = ((System.Drawing.Image)(resources.GetObject("button_HTMLView.Image")));
             this.button_HTMLView.Location = new System.Drawing.Point(42, 2);
             this.button_HTMLView.Margin = new System.Windows.Forms.Padding(2);
             this.button_HTMLView.Name = "button_HTMLView";
             this.button_HTMLView.Size = new System.Drawing.Size(36, 37);
-            this.button_HTMLView.TabIndex = 8;
+            this.button_HTMLView.TabIndex = 6;
             this.button_HTMLView.UseVisualStyleBackColor = true;
+            this.button_HTMLView.Click += new System.EventHandler(this.button_HTMLView_Click);
             // 
             // button_CSVView
             // 
             this.button_CSVView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_CSVView.Enabled = false;
             this.button_CSVView.Image = ((System.Drawing.Image)(resources.GetObject("button_CSVView.Image")));
             this.button_CSVView.Location = new System.Drawing.Point(195, 2);
             this.button_CSVView.Margin = new System.Windows.Forms.Padding(2);
@@ -394,10 +391,12 @@ namespace MassMailer
             this.button_CSVView.Size = new System.Drawing.Size(36, 37);
             this.button_CSVView.TabIndex = 9;
             this.button_CSVView.UseVisualStyleBackColor = true;
+            this.button_CSVView.Click += new System.EventHandler(this.button_CSVView_Click);
             // 
             // button_CSVClear
             // 
             this.button_CSVClear.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_CSVClear.Enabled = false;
             this.button_CSVClear.Image = ((System.Drawing.Image)(resources.GetObject("button_CSVClear.Image")));
             this.button_CSVClear.Location = new System.Drawing.Point(235, 2);
             this.button_CSVClear.Margin = new System.Windows.Forms.Padding(2);
@@ -406,6 +405,22 @@ namespace MassMailer
             this.button_CSVClear.TabIndex = 10;
             this.button_CSVClear.UseVisualStyleBackColor = true;
             this.button_CSVClear.Click += new System.EventHandler(this.button_CSVClear_Click);
+            // 
+            // textBox_MessageText
+            // 
+            this.textBox_MessageText.AllowDrop = true;
+            this.textBox_MessageText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_MessageText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_MessageText.Location = new System.Drawing.Point(20, 143);
+            this.textBox_MessageText.Multiline = true;
+            this.textBox_MessageText.Name = "textBox_MessageText";
+            this.textBox_MessageText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_MessageText.Size = new System.Drawing.Size(980, 496);
+            this.textBox_MessageText.TabIndex = 5;
+            this.textBox_MessageText.TextChanged += new System.EventHandler(this.textBox_MessageText_TextChanged);
+            this.textBox_MessageText.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_MessageText_DragDrop);
+            this.textBox_MessageText.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_MessageText_DragEnter);
+            this.textBox_MessageText.DragLeave += new System.EventHandler(this.textBox_MessageText_DragLeave);
             // 
             // MainForm
             // 
@@ -420,6 +435,7 @@ namespace MassMailer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MassMailer: Plain Text Mode";
             this.tLP_Main.ResumeLayout(false);
+            this.tLP_Main.PerformLayout();
             this.tLP_Bottom.ResumeLayout(false);
             this.tLP_Top.ResumeLayout(false);
             this.tLP_Top.PerformLayout();
@@ -433,7 +449,6 @@ namespace MassMailer
         #endregion
 
         private TableLayoutPanel tLP_Main;
-        private RichTextBox richTextBox_MessageText;
         private TableLayoutPanel tLP_Middle;
         private Label label_Topic;
         private TextBox textBox_Topic;
@@ -456,5 +471,6 @@ namespace MassMailer
         private Button button_CSVView;
         private Button button_CSVClear;
         private Button button_AttachmentsClear;
+        private TextBox textBox_MessageText;
     }
 }

@@ -1,15 +1,10 @@
-﻿using Org.BouncyCastle.Asn1.Pkcs;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing.Text;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MassMailer
 {
-    internal class FoantsLoader
+    internal class FontsLoader
     {
         [DllImport("gdi32.dll", SetLastError = true)]
         private static extern int AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, out uint pcFonts);

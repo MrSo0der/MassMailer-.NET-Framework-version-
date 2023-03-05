@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using MailKit.Net.Smtp;
-using MailKit;
 using MimeKit;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
 using System.Net.Sockets;
-using RazorEngine;
-using RazorEngine.Templating;
 using System.IO;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Forms;
+using HandlebarsDotNet;
 
 namespace MassMailer
 {
@@ -22,8 +13,8 @@ namespace MassMailer
         private static SmtpClient client = new SmtpClient();
         private static bool successfullConnection = false;
         private static string loginEmail = "";
-        private static List<Dictionary<string, string>> userList = new List<Dictionary<string, string>>();
-        public static int usersCount = 0;
+        private static List<Dictionary<string, string>> userList;
+        private static int usersCount = 0;
 
         public static string Auth(string login, string password)
         {
@@ -49,13 +40,14 @@ namespace MassMailer
             }
         }
 
-        public static void FormData(string path)
+        public static int FormData(string data)
         {
-            using (var reader = new StreamReader(path))
+            userList = new List<Dictionary<string, string>>();
+            using (var reader = new StringReader(data))
             {
                 string[] headers = reader.ReadLine().Split(',');
 
-                while (!reader.EndOfStream)
+                while (reader.Peek() != -1)
                 {
                     string[] fields = reader.ReadLine().Split(',');
                     Dictionary<string, string> user = new Dictionary<string, string>();
@@ -67,8 +59,9 @@ namespace MassMailer
                 }
             }
             usersCount = userList.Count;
+            return usersCount;
         }
-        public static string Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, string Mode)
+        public static string Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, string Mode, string CSVData)
         {
             var builder = new BodyBuilder();
             try
@@ -112,11 +105,12 @@ namespace MassMailer
                     goto default;
 
                 case "Dynamic":
+
                     for (int i = 0; i < usersCount; i++)
                     {
                         message.To.Clear();
                         string a = Recipients[i].ToString(); message.To.Add(new MailboxAddress(a, a));
-                        builder.HtmlBody = Engine.Razor.RunCompile(MessageText, "emailBodyTemplate", null, userList[i]);
+                        builder.HtmlBody = Handlebars.Compile(MessageText)(userList[i]);
                         message.Body = builder.ToMessageBody();
                         try
                         {

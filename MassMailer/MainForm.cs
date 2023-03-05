@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Diagnostics.CodeAnalysis;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using System.Runtime.InteropServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MassMailer
 {
@@ -21,6 +12,8 @@ namespace MassMailer
         private static bool isCSV = false;
         private static bool isHTML = false;
         private static string Mode = "Plain";
+        public static string CSVData = "";
+        public static string HTMLData = "";
         public MainForm()
         {
             InitializeComponent();
@@ -28,7 +21,7 @@ namespace MassMailer
         }
         private void LoadFonts()
         {
-            Font HSESansRegular13 = new Font(FoantsLoader.pfc.Families[0], 13, FontStyle.Regular);
+            Font HSESansRegular13 = new Font(FontsLoader.pfc.Families[0], 13, FontStyle.Regular);
             label_ToWhom.Font = HSESansRegular13;
             label_Topic.Font = HSESansRegular13;
             button_Send.Font = HSESansRegular13;
@@ -72,12 +65,17 @@ namespace MassMailer
             {
                 comboBox_Recipients.Items.Add(s.Substring(0, s.Length - 1));
                 textBox_Recipient.Text = "";
+                button_RecipientsClear.Enabled = true;
             }
         }
 
         private void comboBox_Recipients_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_Recipients.Items.Remove(comboBox_Recipients.SelectedItem);
+            if (comboBox_Recipients.Items.Count == 0)
+            {
+                button_RecipientsClear.Enabled = false;
+            }
         }
 
         private void button_Send_Click(object sender, EventArgs e)
@@ -87,9 +85,9 @@ namespace MassMailer
             {
                 status = "noRecipients";
             }
-            else if (Mode != "Dynamic" || SMTPBrains.usersCount >= comboBox_Recipients.Items.Count || MessageBox.Show("Количество указанных Вами получателей больше количества переменных в CSV-файле. Письма с уникальными данными придут не всем получателям. Продолжить отправку?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            else if (Mode != "Dynamic" || SMTPBrains.FormData(CSVData) >= comboBox_Recipients.Items.Count || MessageBox.Show("Количество указанных Вами получателей больше количества переменных в CSV-файле. Письма с уникальными данными придут не всем получателям. Продолжить отправку?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                status = SMTPBrains.Send(richTextBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, comboBox_Files.Items, Mode);
+                status = SMTPBrains.Send(textBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, comboBox_Files.Items, Mode, CSVData);
             }
             LabelStatusShowAndHide(status);
         }
@@ -108,6 +106,7 @@ namespace MassMailer
                 {
                     comboBox_Files.Items.Add(file);
                 }
+                button_AttachmentsClear.Enabled = true;
             }
         }
 
@@ -134,12 +133,17 @@ namespace MassMailer
                 {
                     comboBox_Recipients.Items.Add(address);
                 }
+                button_RecipientsClear.Enabled = true;
             }
         }
 
         private void comboBox_Files_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_Files.Items.Remove(comboBox_Files.SelectedItem);
+            if (comboBox_Files.Items.Count == 0)
+            {
+                button_AttachmentsClear.Enabled = false;
+            }
         }
 
         private void button_CSVFile_Click(object sender, EventArgs e)
@@ -150,7 +154,7 @@ namespace MassMailer
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SMTPBrains.FormData(openFileDialog.FileName);
+                CSVData = File.ReadAllText(openFileDialog.FileName);
                 isCSV = true;
                 ModeUpdater();
             }
@@ -164,7 +168,7 @@ namespace MassMailer
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                richTextBox_MessageText.Text = File.ReadAllText(openFileDialog.FileName);
+                textBox_MessageText.Text = File.ReadAllText(openFileDialog.FileName);
                 isHTML = true;
                 ModeUpdater();
             }
@@ -192,21 +196,23 @@ namespace MassMailer
                 Text = "MassMailer: Plain Text Mode";
                 Mode = "Plain";
             }
+            button_CSVClear.Enabled = isCSV;
+            button_CSVView.Enabled = isCSV;
+            button_HTMLClear.Enabled = isHTML;
+            button_HTMLView.Enabled = isHTML;
         }
 
         private void button_RecipientsClear_Click(object sender, EventArgs e)
         {
             comboBox_Recipients.Items.Clear();
+            button_RecipientsClear.Enabled = false;
         }
 
         private void button_HTMLClear_Click(object sender, EventArgs e)
         {
-            if (isHTML)
-            {
-                richTextBox_MessageText.Text = "";
+                textBox_MessageText.Text = "";
                 isHTML = false;
                 ModeUpdater();
-            }
         }
 
         private void button_CSVClear_Click(object sender, EventArgs e)
@@ -218,6 +224,51 @@ namespace MassMailer
         private void button_AttachmentsClear_Click(object sender, EventArgs e)
         {
             comboBox_Files.Items.Clear();
+            button_AttachmentsClear.Enabled = false;
+        }
+
+        private void button_HTMLView_Click(object sender, EventArgs e)
+        {
+            new HTMLViewForm().ShowDialog();
+        }
+
+        private void button_CSVView_Click(object sender, EventArgs e)
+        {
+            new CSVViewForm().ShowDialog();
+        }
+
+        private void textBox_MessageText_TextChanged(object sender, EventArgs e)
+        {
+            HTMLData = textBox_MessageText.Text;
+        }
+
+        private void textBox_MessageText_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                textBox_MessageText.Text = File.ReadAllText(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
+                isHTML = true;
+                ModeUpdater();
+            }
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                textBox_MessageText.Text = (string)e.Data.GetData(DataFormats.StringFormat);
+                isHTML = false;
+                ModeUpdater();
+            }
+
+        }
+        private void textBox_MessageText_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat) || (e.Data.GetDataPresent(DataFormats.FileDrop) && (((string[])e.Data.GetData(DataFormats.FileDrop))[0].EndsWith(".html") || ((string[])e.Data.GetData(DataFormats.FileDrop))[0].EndsWith(".txt"))))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void textBox_MessageText_DragLeave(object sender, EventArgs e)
+        {
+
         }
     }
 }

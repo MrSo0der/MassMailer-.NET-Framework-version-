@@ -103,7 +103,7 @@ namespace MassMailer
             this.checkBox_Remember.Dock = System.Windows.Forms.DockStyle.Top;
             this.checkBox_Remember.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.26956F);
             this.checkBox_Remember.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.checkBox_Remember.Location = new System.Drawing.Point(0, 100);
+            this.checkBox_Remember.Location = new System.Drawing.Point(0, 104);
             this.checkBox_Remember.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_Remember.Name = "checkBox_Remember";
             this.checkBox_Remember.Size = new System.Drawing.Size(282, 28);
@@ -116,12 +116,14 @@ namespace MassMailer
             // 
             this.textBox_Password.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.89565F);
-            this.textBox_Password.Location = new System.Drawing.Point(0, 70);
+            this.textBox_Password.Location = new System.Drawing.Point(0, 72);
             this.textBox_Password.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Password.Multiline = true;
             this.textBox_Password.Name = "textBox_Password";
             this.textBox_Password.PasswordChar = '•';
-            this.textBox_Password.Size = new System.Drawing.Size(282, 30);
+            this.textBox_Password.Size = new System.Drawing.Size(282, 32);
             this.textBox_Password.TabIndex = 8;
+            this.textBox_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Password_KeyDown);
             // 
             // tLP_LoginButton
             // 
@@ -159,7 +161,7 @@ namespace MassMailer
             this.label_Password.Dock = System.Windows.Forms.DockStyle.Top;
             this.label_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.765218F, System.Drawing.FontStyle.Bold);
             this.label_Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(92)))), ((int)(((byte)(192)))));
-            this.label_Password.Location = new System.Drawing.Point(0, 48);
+            this.label_Password.Location = new System.Drawing.Point(0, 50);
             this.label_Password.Name = "label_Password";
             this.label_Password.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.label_Password.Size = new System.Drawing.Size(67, 22);
@@ -172,9 +174,11 @@ namespace MassMailer
             this.textBox_Login.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.89565F);
             this.textBox_Login.Location = new System.Drawing.Point(0, 18);
             this.textBox_Login.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Login.Multiline = true;
             this.textBox_Login.Name = "textBox_Login";
-            this.textBox_Login.Size = new System.Drawing.Size(282, 30);
+            this.textBox_Login.Size = new System.Drawing.Size(282, 32);
             this.textBox_Login.TabIndex = 6;
+            this.textBox_Login.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Login_KeyDown);
             // 
             // label_Login
             // 
@@ -213,6 +217,7 @@ namespace MassMailer
             this.Name = "AuthForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MassMailer";
+            this.Load += new System.EventHandler(this.AuthForm_Load);
             this.tLP_Main.ResumeLayout(false);
             this.tLP_Main.PerformLayout();
             this.panel_LoginPassword.ResumeLayout(false);

@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,14 +42,14 @@ namespace MassMailer
 
         private void LoadFonts()
         {
-            label_MassMailer.Font = new Font(FoantsLoader.pfc.Families[1], 28, FontStyle.Bold);
-            checkBox_Remember.Font = new Font(FoantsLoader.pfc.Families[0], 11, FontStyle.Regular);
-            textBox_Login.Font = new Font(FoantsLoader.pfc.Families[0], 12, FontStyle.Regular);
-            textBox_Password.Font = new Font(FoantsLoader.pfc.Families[0], 12, FontStyle.Regular);
-            button_Login.Font = new Font(FoantsLoader.pfc.Families[0], 16, FontStyle.Regular);
-            label_Password.Font = new Font(FoantsLoader.pfc.Families[0], 9, FontStyle.Bold);
-            label_Login.Font = new Font(FoantsLoader.pfc.Families[0], 9, FontStyle.Bold);
-            label_Errors.Font = new Font(FoantsLoader.pfc.Families[0], 11, FontStyle.Regular);
+            label_MassMailer.Font = new Font(FontsLoader.pfc.Families[1], 28, FontStyle.Bold);
+            checkBox_Remember.Font = new Font(FontsLoader.pfc.Families[0], 11, FontStyle.Regular);
+            textBox_Login.Font = new Font(FontsLoader.pfc.Families[0], 12, FontStyle.Regular);
+            textBox_Password.Font = new Font(FontsLoader.pfc.Families[0], 12, FontStyle.Regular);
+            button_Login.Font = new Font(FontsLoader.pfc.Families[0], 16, FontStyle.Regular);
+            label_Password.Font = new Font(FontsLoader.pfc.Families[0], 9, FontStyle.Bold);
+            label_Login.Font = new Font(FontsLoader.pfc.Families[0], 9, FontStyle.Bold);
+            label_Errors.Font = new Font(FontsLoader.pfc.Families[0], 11, FontStyle.Regular);
         }
 
         private async void LabelErrorsShowAndHide()
@@ -88,5 +80,28 @@ namespace MassMailer
             Properties.Settings.Default.Save();
         }
 
+        private void textBox_Password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                button_Login.PerformClick();
+            }
+        }
+
+        private void textBox_Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                button_Login.PerformClick();
+            }
+        }
+
+        private void AuthForm_Load(object sender, EventArgs e)
+        {
+            textBox_Login.SelectionStart = textBox_Login.Text.Length;
+            textBox_Login.SelectionLength = 0;
+        }
     }
 }

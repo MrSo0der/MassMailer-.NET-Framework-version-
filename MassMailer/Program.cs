@@ -14,7 +14,7 @@ namespace MassMailer
         [STAThread]
         static void Main()
         {
-            FoantsLoader.Initialize();
+            FontsLoader.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AuthForm());
