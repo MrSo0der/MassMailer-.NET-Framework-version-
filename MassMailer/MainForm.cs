@@ -177,9 +177,9 @@ namespace MassMailer
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                textBox_MessageText.Text = File.ReadAllText(openFileDialog.FileName);
                 isHTML = true;
                 ModeUpdater();
+                textBox_MessageText.Text = File.ReadAllText(openFileDialog.FileName);
             }
         }
 
