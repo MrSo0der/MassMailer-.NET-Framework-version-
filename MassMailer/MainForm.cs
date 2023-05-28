@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MassMailer
 {
@@ -11,10 +9,14 @@ namespace MassMailer
     {
         private static bool isCSV = false;
         private static bool isHTML = false;
-        private static short Mode = 0;
+        private static short mode = 0;
         private static short status;
-        public static string CSVData = "";
-        public static string HTMLData = "";
+        private static string cSVData = "";
+        private static string hTMLData = "";
+
+        public static string CSVData { get => cSVData; set => cSVData = value; }
+        public static string HTMLData { get => hTMLData; set => hTMLData = value; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace MassMailer
         }
         private void LoadFonts()
         {
-            Font HSESansRegular13 = new Font(FontsLoader.pfc.Families[0], 13, FontStyle.Regular);
+            Font HSESansRegular13 = new Font(FontsLoader.Pfc.Families[0], 13, FontStyle.Regular);
             label_ToWhom.Font = HSESansRegular13;
             label_Topic.Font = HSESansRegular13;
             button_Send.Font = HSESansRegular13;
@@ -31,7 +33,7 @@ namespace MassMailer
             comboBox_Files.Font = HSESansRegular13;
             comboBox_Recipients.Font = HSESansRegular13;
         }
-        private async void LabelStatusShowAndHide(short status)
+        private void LabelStatusShowAndHide(short status)
         {
             switch (status)
             {
@@ -47,8 +49,8 @@ namespace MassMailer
                 case 4: // sendingCancelled
                     label_Status.Text = "Отправка отменена";
                     break;
-                case 5: // wrongCSVFileContents
-                    label_Status.Text = "Неправильное наполнение CSV-файла";
+                case 5: // filesNotFound
+                    label_Status.Text = "Файлы перемещены или удалены.";
                     break;
                 case 0: // success
                     label_Status.Text = "Отправлено!";
@@ -56,7 +58,11 @@ namespace MassMailer
                     break;
             }
             label_Status.Visible = true;
-            await Task.Delay(3000);
+            timer_LabelShow.Enabled = false;
+            timer_LabelShow.Enabled = true;
+        }
+        private void timer_LabelShow_Tick(object sender, EventArgs e)
+        {
             label_Status.Visible = false;
             label_Status.ForeColor = Color.Red;
         }
@@ -89,22 +95,25 @@ namespace MassMailer
             {
                 status = 1;
             }
-            else if (Mode != 2 || ShouldContinueWithDynamicMode())
+            else if (mode != 2 || ShouldContinueWithDynamicMode())
             {
-                status = SMTPBrains.Send(textBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, comboBox_Files.Items, Mode, CSVData);
+                status = SMTPBrains.Send(textBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, comboBox_Files.Items, mode);
             }
             LabelStatusShowAndHide(status);
         }
 
         private bool ShouldContinueWithDynamicMode()
         {
-            int CSVFormingResult = SMTPBrains.FormData(CSVData);
-            if (CSVFormingResult == -1)
-            {
-                status = 5;
-                return false;
-            }
-            return CSVFormingResult >= comboBox_Recipients.Items.Count || MessageBox.Show("Количество указанных Вами получателей больше количества переменных в CSV-файле. Письма с уникальными данными придут не всем получателям. Продолжить отправку?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            int recipientsInCSVCount = SMTPBrains.FormData(CSVData).Count;
+            int recipientsInComboBoxCount = comboBox_Recipients.Items.Count;
+
+            if (recipientsInCSVCount == recipientsInComboBoxCount) { return true; }
+
+            string warning = recipientsInCSVCount > recipientsInComboBoxCount
+                ? "Количество указанных Вами получателей меньше количества полей данных в CSV-файле.\nЧасть данных при отправке писем использоваться не будет.\nПродолжить отправку?"
+                : "Количество указанных Вами получателей больше количества полей данных в CSV-файле.\nПисьма дойдут не всем получателям.\nПродолжить отправку?";
+
+            return MessageBox.Show(warning, "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
 
         private void button_AttachFiles_Click(object sender, EventArgs e)
@@ -135,7 +144,7 @@ namespace MassMailer
 
             using (var reader = new StreamReader(path))
             {
-                fields = reader.ReadLine().Split(',');
+                fields = reader.ReadLine().Split('\t');
             }
 
             comboBox_Recipients.Items.Clear();
@@ -188,22 +197,22 @@ namespace MassMailer
             if (isHTML && isCSV)
             {
                 Text = "MassMailer: Dynamic HTML Mode";
-                Mode = 2; // Dynamic
+                mode = 2; // Dynamic
             }
             else if (isHTML)
             {
                 Text = "MassMailer: Static HTML Mode";
-                Mode = 1; // Static
+                mode = 1; // Static
             }
             else if (isCSV)
             {
                 Text = "MassMailer: Plain Text Mode (CSV file selected)";
-                Mode = 0; // Plain
+                mode = 0; // Plain
             }
             else
             {
                 Text = "MassMailer: Plain Text Mode";
-                Mode = 0;
+                mode = 0;
             }
             button_CSVClear.Enabled = isCSV;
             button_CSVView.Enabled = isCSV;
@@ -238,7 +247,8 @@ namespace MassMailer
 
         private void button_HTMLView_Click(object sender, EventArgs e)
         {
-            new HTMLViewForm().ShowDialog();
+            HTMLViewForm form = new HTMLViewForm(comboBox_Recipients.Items, mode == 2);
+            form.ShowDialog();
         }
 
         private void button_CSVView_Click(object sender, EventArgs e)

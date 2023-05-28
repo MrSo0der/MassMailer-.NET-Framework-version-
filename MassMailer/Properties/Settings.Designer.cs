@@ -58,5 +58,17 @@ namespace MassMailer.Properties {
                 this["Password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PasswordYandexFix {
+            get {
+                return ((string)(this["PasswordYandexFix"]));
+            }
+            set {
+                this["PasswordYandexFix"] = value;
+            }
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace MassMailer
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthForm));
             this.tLP_Main = new System.Windows.Forms.TableLayoutPanel();
             this.label_MassMailer = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@ namespace MassMailer
             this.textBox_Login = new System.Windows.Forms.TextBox();
             this.label_Login = new System.Windows.Forms.Label();
             this.label_Errors = new System.Windows.Forms.Label();
+            this.timer_LabelShow = new System.Windows.Forms.Timer(this.components);
             this.tLP_Main.SuspendLayout();
             this.panel_LoginPassword.SuspendLayout();
             this.tLP_LoginButton.SuspendLayout();
@@ -204,6 +206,11 @@ namespace MassMailer
             this.label_Errors.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label_Errors.Visible = false;
             // 
+            // timer_LabelShow
+            // 
+            this.timer_LabelShow.Interval = 3000;
+            this.timer_LabelShow.Tick += new System.EventHandler(this.timer_LabelShow_Tick);
+            // 
             // AuthForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(119F, 119F);
@@ -240,5 +247,6 @@ namespace MassMailer
         private Panel panel_LoginPassword;
         private TableLayoutPanel tLP_LoginButton;
         private Label label_Errors;
+        private Timer timer_LabelShow;
     }
 }

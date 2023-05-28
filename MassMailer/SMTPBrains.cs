@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.IO;
 using System.Windows.Forms;
 using HandlebarsDotNet;
-using System;
 
 namespace MassMailer
 {
@@ -23,7 +22,7 @@ namespace MassMailer
             {
                 if (!successfullConnection)
                 {
-                    client.Connect("smtp.yandex.ru", 587, false);
+                    client.Connect("smtp.yandex.ru", 465, true);
                     successfullConnection = true;
                 }
                 //"MrSo0der@yandex.ru", "iqzxcnyanqfqobaq"
@@ -41,35 +40,32 @@ namespace MassMailer
             }
         }
 
-        public static int FormData(string data)
+        public static List<Dictionary<string, string>> FormData(string data)
         {
             userList = new List<Dictionary<string, string>>();
             using (var reader = new StringReader(data))
             {
-                string[] headers = reader.ReadLine().Split(',');
+                string[] headers = reader.ReadLine().Split(new string[] { "\t" }, 0);
 
-                while (reader.Peek() != -1)
+                int varsCount = headers.Length;
+
+                string[] userRawData = reader.ReadToEnd().Replace("||", "<br>").Split(new string[] { "\n" }, 0);
+                usersCount = userRawData.Length;
+
+                for (int i = 0; i < usersCount; i++)
                 {
-                    string[] fields = reader.ReadLine().Split(',');
+                    string[] varsForCurrentUser = userRawData[i].Split(new string[] { "\t" }, 0); ;
                     Dictionary<string, string> user = new Dictionary<string, string>();
-                    try
+                    for (int j = 0; j < (varsForCurrentUser.Length < varsCount ? varsForCurrentUser.Length : varsCount); j++)
                     {
-                        for (int i = 0; i < headers.Length; i++)
-                        {
-                            user.Add(headers[i], fields[i]);
-                        }
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        return -1;
+                        user.Add(headers[j], varsForCurrentUser[j]);
                     }
                     userList.Add(user);
                 }
             }
-            usersCount = userList.Count;
-            return usersCount;
+            return userList;
         }
-        public static short Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, short Mode, string CSVData)
+        public static short Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, short Mode)
         {
             var builder = new BodyBuilder();
             try
@@ -78,6 +74,10 @@ namespace MassMailer
                 {
                     builder.Attachments.Add(file.ToString());
                 }
+            }
+            catch (FileNotFoundException)
+            {
+                return 5;
             }
             catch (IOException)
             {
@@ -97,27 +97,36 @@ namespace MassMailer
                     goto case 10;
 
                 case 10:
-                    foreach (var address in Recipients)
-                    {
-                        string a = address.ToString(); message.To.Add(new MailboxAddress(a, a));
-                    }
-                    message.Body = builder.ToMessageBody();
                     try
                     {
+                        foreach (var address in Recipients)
+                        {
+                            string a = address.ToString(); message.To.Add(new MailboxAddress(a, a));
+                        }
+                        message.Body = builder.ToMessageBody();
+
                         client.Send(message);
                     }
                     catch (SmtpCommandException)
                     {
                         return 2;
                     }
+                    catch (ParseException)
+                    {
+                        return 2;
+                    }
+                    catch (SmtpProtocolException) // Yandex Fix
+                    {
+                        ReconnectAndSend(message);
+                    }
                     goto default;
 
                 case 2:
 
-                    for (int i = 0; i < usersCount; i++)
+                    for (int i = 0; i < (usersCount < Recipients.Count ? usersCount : Recipients.Count); i++)
                     {
                         message.To.Clear();
-                        string a = Recipients[i].ToString(); message.To.Add(new MailboxAddress(a, a));
+                        string a = Recipients[i].ToString(); try { message.To.Add(new MailboxAddress(a, a)); } catch (ParseException) { return 2; }
                         builder.HtmlBody = Handlebars.Compile(MessageText)(userList[i]);
                         message.Body = builder.ToMessageBody();
                         try
@@ -128,11 +137,22 @@ namespace MassMailer
                         {
                             return 2;
                         }
+                        catch (SmtpProtocolException) // Yandex Fix
+                        {
+                            ReconnectAndSend(message);
+                        }
                     }
                     goto default;
 
                 default: return 0;
             }
+        }
+        private static void ReconnectAndSend(MimeMessage message)
+        {
+            client.Disconnect(true);
+            client.Connect("smtp.yandex.ru", 465, true);
+            client.Authenticate(Properties.Settings.Default.Login, Encryption.Decrypt(Properties.Settings.Default.PasswordYandexFix, true));
+            client.Send(message);
         }
         public static void Disconnect()
         {
