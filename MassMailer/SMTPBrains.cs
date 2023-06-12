@@ -65,8 +65,9 @@ namespace MassMailer
             }
             return userList;
         }
-        public static short Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, ComboBox.ObjectCollection Files, short Mode)
+        public static short Send(string MessageText, ComboBox.ObjectCollection Recipients, string Subject, string Sender, ComboBox.ObjectCollection Files, short Mode)
         {
+            Sender = Sender == "" ? loginEmail : Sender;
             var builder = new BodyBuilder();
             try
             {
@@ -84,7 +85,7 @@ namespace MassMailer
                 return 3;
             }
             MimeMessage message = new MimeMessage();
-            message.From.Add(new MailboxAddress(loginEmail, loginEmail));
+            message.From.Add(new MailboxAddress(Sender, loginEmail));
             message.Subject = Subject;
 
             switch (Mode)

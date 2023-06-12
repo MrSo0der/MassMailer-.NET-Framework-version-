@@ -26,9 +26,11 @@ namespace MassMailer
         {
             Font HSESansRegular13 = new Font(FontsLoader.Pfc.Families[0], 13, FontStyle.Regular);
             label_ToWhom.Font = HSESansRegular13;
+            label_FromWho.Font = HSESansRegular13;
             label_Topic.Font = HSESansRegular13;
             button_Send.Font = HSESansRegular13;
             textBox_Topic.Font = HSESansRegular13;
+            textBox_FromWho.Font = HSESansRegular13;
             textBox_Recipient.Font = HSESansRegular13;
             comboBox_Files.Font = HSESansRegular13;
             comboBox_Recipients.Font = HSESansRegular13;
@@ -97,7 +99,7 @@ namespace MassMailer
             }
             else if (mode != 2 || ShouldContinueWithDynamicMode())
             {
-                status = SMTPBrains.Send(textBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, comboBox_Files.Items, mode);
+                status = SMTPBrains.Send(textBox_MessageText.Text, comboBox_Recipients.Items, textBox_Topic.Text, textBox_FromWho.Text, comboBox_Files.Items, mode);
             }
             LabelStatusShowAndHide(status);
         }
