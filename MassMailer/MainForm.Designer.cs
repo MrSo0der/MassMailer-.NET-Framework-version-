@@ -41,11 +41,16 @@ namespace MassMailer
             this.comboBox_Files = new System.Windows.Forms.ComboBox();
             this.button_AttachmentsClear = new System.Windows.Forms.Button();
             this.tLP_Top = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox_Recipient = new System.Windows.Forms.TextBox();
-            this.label_ToWhom = new System.Windows.Forms.Label();
+            this.textBox_Topic = new System.Windows.Forms.TextBox();
+            this.label_Topic = new System.Windows.Forms.Label();
+            this.tableLP_TopLeft = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox_Recipients = new System.Windows.Forms.ComboBox();
-            this.button_RecipientsFile = new System.Windows.Forms.Button();
             this.button_RecipientsClear = new System.Windows.Forms.Button();
+            this.button_RecipientsFile = new System.Windows.Forms.Button();
+            this.textBox_Recipient = new System.Windows.Forms.TextBox();
+            this.textBox_FromWho = new System.Windows.Forms.TextBox();
+            this.label_ToWhom = new System.Windows.Forms.Label();
+            this.label_FromWho = new System.Windows.Forms.Label();
             this.tLP_html = new System.Windows.Forms.TableLayoutPanel();
             this.button_HTMLFile = new System.Windows.Forms.Button();
             this.button_HTMLClear = new System.Windows.Forms.Button();
@@ -55,39 +60,32 @@ namespace MassMailer
             this.button_CSVClear = new System.Windows.Forms.Button();
             this.textBox_MessageText = new System.Windows.Forms.TextBox();
             this.timer_LabelShow = new System.Windows.Forms.Timer(this.components);
-            this.textBox_Topic = new System.Windows.Forms.TextBox();
-            this.label_FromWho = new System.Windows.Forms.Label();
-            this.tLP_Middle = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox_FromWho = new System.Windows.Forms.TextBox();
-            this.label_Topic = new System.Windows.Forms.Label();
             this.tLP_Main.SuspendLayout();
             this.tLP_Bottom.SuspendLayout();
             this.tLP_Top.SuspendLayout();
+            this.tableLP_TopLeft.SuspendLayout();
             this.tLP_html.SuspendLayout();
-            this.tLP_Middle.SuspendLayout();
             this.SuspendLayout();
             // 
             // tLP_Main
             // 
             this.tLP_Main.ColumnCount = 1;
             this.tLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Main.Controls.Add(this.tLP_Bottom, 0, 4);
+            this.tLP_Main.Controls.Add(this.tLP_Bottom, 0, 3);
             this.tLP_Main.Controls.Add(this.tLP_Top, 0, 0);
-            this.tLP_Main.Controls.Add(this.tLP_Middle, 0, 1);
-            this.tLP_Main.Controls.Add(this.tLP_html, 0, 2);
-            this.tLP_Main.Controls.Add(this.textBox_MessageText, 0, 3);
+            this.tLP_Main.Controls.Add(this.tLP_html, 0, 1);
+            this.tLP_Main.Controls.Add(this.textBox_MessageText, 0, 2);
             this.tLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tLP_Main.Location = new System.Drawing.Point(0, 0);
             this.tLP_Main.Margin = new System.Windows.Forms.Padding(0);
             this.tLP_Main.Name = "tLP_Main";
             this.tLP_Main.Padding = new System.Windows.Forms.Padding(17);
-            this.tLP_Main.RowCount = 5;
-            this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tLP_Main.RowCount = 4;
+            this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tLP_Main.Size = new System.Drawing.Size(1020, 700);
             this.tLP_Main.TabIndex = 0;
             // 
@@ -188,56 +186,72 @@ namespace MassMailer
             // 
             // tLP_Top
             // 
-            this.tLP_Top.ColumnCount = 7;
+            this.tLP_Top.ColumnCount = 4;
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450F));
+            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tLP_Top.Controls.Add(this.textBox_Topic, 3, 1);
+            this.tLP_Top.Controls.Add(this.label_Topic, 2, 1);
+            this.tLP_Top.Controls.Add(this.tableLP_TopLeft, 3, 0);
             this.tLP_Top.Controls.Add(this.textBox_Recipient, 0, 0);
+            this.tLP_Top.Controls.Add(this.textBox_FromWho, 1, 1);
             this.tLP_Top.Controls.Add(this.label_ToWhom, 0, 0);
-            this.tLP_Top.Controls.Add(this.comboBox_Recipients, 3, 0);
-            this.tLP_Top.Controls.Add(this.button_RecipientsFile, 5, 0);
-            this.tLP_Top.Controls.Add(this.button_RecipientsClear, 6, 0);
+            this.tLP_Top.Controls.Add(this.label_FromWho, 0, 1);
             this.tLP_Top.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tLP_Top.Location = new System.Drawing.Point(17, 17);
             this.tLP_Top.Margin = new System.Windows.Forms.Padding(0);
             this.tLP_Top.Name = "tLP_Top";
-            this.tLP_Top.RowCount = 1;
-            this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Top.Size = new System.Drawing.Size(986, 41);
+            this.tLP_Top.RowCount = 2;
+            this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLP_Top.Size = new System.Drawing.Size(986, 82);
             this.tLP_Top.TabIndex = 0;
             // 
-            // textBox_Recipient
+            // textBox_Topic
             // 
-            this.textBox_Recipient.AllowDrop = true;
-            this.textBox_Recipient.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox_Recipient.Font = new System.Drawing.Font("Segoe UI", 13F);
-            this.textBox_Recipient.Location = new System.Drawing.Point(73, 2);
-            this.textBox_Recipient.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Recipient.Multiline = true;
-            this.textBox_Recipient.Name = "textBox_Recipient";
-            this.textBox_Recipient.Size = new System.Drawing.Size(407, 36);
-            this.textBox_Recipient.TabIndex = 1;
-            this.textBox_Recipient.TextChanged += new System.EventHandler(this.textBox_Recipient_TextChanged);
-            this.textBox_Recipient.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
-            this.textBox_Recipient.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
-            this.textBox_Recipient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Recipient_KeyDown);
+            this.textBox_Topic.AllowDrop = true;
+            this.textBox_Topic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_Topic.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.textBox_Topic.Location = new System.Drawing.Point(620, 43);
+            this.textBox_Topic.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Topic.Name = "textBox_Topic";
+            this.textBox_Topic.Size = new System.Drawing.Size(364, 36);
+            this.textBox_Topic.TabIndex = 4;
+            this.textBox_Topic.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragDrop);
+            this.textBox_Topic.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragEnter);
             // 
-            // label_ToWhom
+            // label_Topic
             // 
-            this.label_ToWhom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_ToWhom.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label_ToWhom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
-            this.label_ToWhom.Location = new System.Drawing.Point(2, 0);
-            this.label_ToWhom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_ToWhom.Name = "label_ToWhom";
-            this.label_ToWhom.Size = new System.Drawing.Size(67, 41);
-            this.label_ToWhom.TabIndex = 0;
-            this.label_ToWhom.Text = "Кому:";
-            this.label_ToWhom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_Topic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_Topic.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label_Topic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
+            this.label_Topic.Location = new System.Drawing.Point(550, 41);
+            this.label_Topic.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_Topic.Name = "label_Topic";
+            this.label_Topic.Size = new System.Drawing.Size(66, 41);
+            this.label_Topic.TabIndex = 6;
+            this.label_Topic.Text = "Тема:";
+            this.label_Topic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tableLP_TopLeft
+            // 
+            this.tableLP_TopLeft.ColumnCount = 4;
+            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLP_TopLeft.Controls.Add(this.comboBox_Recipients, 0, 0);
+            this.tableLP_TopLeft.Controls.Add(this.button_RecipientsClear, 3, 0);
+            this.tableLP_TopLeft.Controls.Add(this.button_RecipientsFile, 2, 0);
+            this.tableLP_TopLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLP_TopLeft.Location = new System.Drawing.Point(618, 0);
+            this.tableLP_TopLeft.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLP_TopLeft.Name = "tableLP_TopLeft";
+            this.tableLP_TopLeft.RowCount = 1;
+            this.tableLP_TopLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLP_TopLeft.Size = new System.Drawing.Size(368, 41);
+            this.tableLP_TopLeft.TabIndex = 5;
             // 
             // comboBox_Recipients
             // 
@@ -245,15 +259,28 @@ namespace MassMailer
             this.comboBox_Recipients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_Recipients.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.comboBox_Recipients.FormattingEnabled = true;
-            this.comboBox_Recipients.Location = new System.Drawing.Point(517, 2);
+            this.comboBox_Recipients.Location = new System.Drawing.Point(2, 2);
             this.comboBox_Recipients.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Recipients.Name = "comboBox_Recipients";
-            this.comboBox_Recipients.Size = new System.Drawing.Size(332, 38);
+            this.comboBox_Recipients.Size = new System.Drawing.Size(251, 38);
             this.comboBox_Recipients.TabIndex = 0;
             this.comboBox_Recipients.TabStop = false;
             this.comboBox_Recipients.SelectedIndexChanged += new System.EventHandler(this.comboBox_Recipients_SelectedIndexChanged);
             this.comboBox_Recipients.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
             this.comboBox_Recipients.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
+            // 
+            // button_RecipientsClear
+            // 
+            this.button_RecipientsClear.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_RecipientsClear.Enabled = false;
+            this.button_RecipientsClear.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsClear.Image")));
+            this.button_RecipientsClear.Location = new System.Drawing.Point(330, 2);
+            this.button_RecipientsClear.Margin = new System.Windows.Forms.Padding(2);
+            this.button_RecipientsClear.Name = "button_RecipientsClear";
+            this.button_RecipientsClear.Size = new System.Drawing.Size(36, 37);
+            this.button_RecipientsClear.TabIndex = 3;
+            this.button_RecipientsClear.UseVisualStyleBackColor = true;
+            this.button_RecipientsClear.Click += new System.EventHandler(this.button_RecipientsClear_Click);
             // 
             // button_RecipientsFile
             // 
@@ -261,7 +288,7 @@ namespace MassMailer
             this.button_RecipientsFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.button_RecipientsFile.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.button_RecipientsFile.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsFile.Image")));
-            this.button_RecipientsFile.Location = new System.Drawing.Point(886, 2);
+            this.button_RecipientsFile.Location = new System.Drawing.Point(290, 2);
             this.button_RecipientsFile.Margin = new System.Windows.Forms.Padding(2);
             this.button_RecipientsFile.Name = "button_RecipientsFile";
             this.button_RecipientsFile.Size = new System.Drawing.Size(36, 37);
@@ -271,18 +298,60 @@ namespace MassMailer
             this.button_RecipientsFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
             this.button_RecipientsFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
             // 
-            // button_RecipientsClear
+            // textBox_Recipient
             // 
-            this.button_RecipientsClear.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button_RecipientsClear.Enabled = false;
-            this.button_RecipientsClear.Image = ((System.Drawing.Image)(resources.GetObject("button_RecipientsClear.Image")));
-            this.button_RecipientsClear.Location = new System.Drawing.Point(926, 2);
-            this.button_RecipientsClear.Margin = new System.Windows.Forms.Padding(2);
-            this.button_RecipientsClear.Name = "button_RecipientsClear";
-            this.button_RecipientsClear.Size = new System.Drawing.Size(37, 37);
-            this.button_RecipientsClear.TabIndex = 3;
-            this.button_RecipientsClear.UseVisualStyleBackColor = true;
-            this.button_RecipientsClear.Click += new System.EventHandler(this.button_RecipientsClear_Click);
+            this.textBox_Recipient.AllowDrop = true;
+            this.textBox_Recipient.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox_Recipient.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.textBox_Recipient.Location = new System.Drawing.Point(102, 2);
+            this.textBox_Recipient.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Recipient.Multiline = true;
+            this.textBox_Recipient.Name = "textBox_Recipient";
+            this.textBox_Recipient.Size = new System.Drawing.Size(444, 36);
+            this.textBox_Recipient.TabIndex = 1;
+            this.textBox_Recipient.TextChanged += new System.EventHandler(this.textBox_Recipient_TextChanged);
+            this.textBox_Recipient.DragDrop += new System.Windows.Forms.DragEventHandler(this.recipients_DragDrop);
+            this.textBox_Recipient.DragEnter += new System.Windows.Forms.DragEventHandler(this.recipients_DragEnter);
+            this.textBox_Recipient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Recipient_KeyDown);
+            // 
+            // textBox_FromWho
+            // 
+            this.textBox_FromWho.AllowDrop = true;
+            this.textBox_FromWho.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox_FromWho.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.textBox_FromWho.Location = new System.Drawing.Point(102, 43);
+            this.textBox_FromWho.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_FromWho.Name = "textBox_FromWho";
+            this.textBox_FromWho.Size = new System.Drawing.Size(444, 36);
+            this.textBox_FromWho.TabIndex = 5;
+            this.textBox_FromWho.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_FromWho_DragDrop);
+            this.textBox_FromWho.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_FromWho_DragEnter);
+            // 
+            // label_ToWhom
+            // 
+            this.label_ToWhom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_ToWhom.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label_ToWhom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
+            this.label_ToWhom.Location = new System.Drawing.Point(2, 0);
+            this.label_ToWhom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_ToWhom.Name = "label_ToWhom";
+            this.label_ToWhom.Size = new System.Drawing.Size(96, 41);
+            this.label_ToWhom.TabIndex = 0;
+            this.label_ToWhom.Text = "Кому:";
+            this.label_ToWhom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label_FromWho
+            // 
+            this.label_FromWho.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_FromWho.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label_FromWho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
+            this.label_FromWho.Location = new System.Drawing.Point(2, 41);
+            this.label_FromWho.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_FromWho.Name = "label_FromWho";
+            this.label_FromWho.Size = new System.Drawing.Size(96, 41);
+            this.label_FromWho.TabIndex = 0;
+            this.label_FromWho.Text = "От кого:";
+            this.label_FromWho.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tLP_html
             // 
@@ -414,76 +483,6 @@ namespace MassMailer
             this.timer_LabelShow.Interval = 3000;
             this.timer_LabelShow.Tick += new System.EventHandler(this.timer_LabelShow_Tick);
             // 
-            // textBox_Topic
-            // 
-            this.textBox_Topic.AllowDrop = true;
-            this.textBox_Topic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_Topic.Font = new System.Drawing.Font("Segoe UI", 13F);
-            this.textBox_Topic.Location = new System.Drawing.Point(580, 2);
-            this.textBox_Topic.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Topic.Name = "textBox_Topic";
-            this.textBox_Topic.Size = new System.Drawing.Size(404, 36);
-            this.textBox_Topic.TabIndex = 4;
-            this.textBox_Topic.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragDrop);
-            this.textBox_Topic.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_Topic_DragEnter);
-            // 
-            // label_FromWho
-            // 
-            this.label_FromWho.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_FromWho.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label_FromWho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
-            this.label_FromWho.Location = new System.Drawing.Point(2, 0);
-            this.label_FromWho.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_FromWho.Name = "label_FromWho";
-            this.label_FromWho.Size = new System.Drawing.Size(96, 41);
-            this.label_FromWho.TabIndex = 0;
-            this.label_FromWho.Text = "От кого:";
-            this.label_FromWho.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tLP_Middle
-            // 
-            this.tLP_Middle.ColumnCount = 4;
-            this.tLP_Middle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tLP_Middle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450F));
-            this.tLP_Middle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tLP_Middle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Middle.Controls.Add(this.label_Topic, 0, 0);
-            this.tLP_Middle.Controls.Add(this.textBox_FromWho, 0, 0);
-            this.tLP_Middle.Controls.Add(this.label_FromWho, 0, 0);
-            this.tLP_Middle.Controls.Add(this.textBox_Topic, 1, 0);
-            this.tLP_Middle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLP_Middle.Location = new System.Drawing.Point(17, 58);
-            this.tLP_Middle.Margin = new System.Windows.Forms.Padding(0);
-            this.tLP_Middle.Name = "tLP_Middle";
-            this.tLP_Middle.RowCount = 1;
-            this.tLP_Middle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Middle.Size = new System.Drawing.Size(986, 41);
-            this.tLP_Middle.TabIndex = 1;
-            // 
-            // textBox_FromWho
-            // 
-            this.textBox_FromWho.AllowDrop = true;
-            this.textBox_FromWho.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_FromWho.Font = new System.Drawing.Font("Segoe UI", 13F);
-            this.textBox_FromWho.Location = new System.Drawing.Point(102, 2);
-            this.textBox_FromWho.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_FromWho.Name = "textBox_FromWho";
-            this.textBox_FromWho.Size = new System.Drawing.Size(404, 36);
-            this.textBox_FromWho.TabIndex = 5;
-            // 
-            // label_Topic
-            // 
-            this.label_Topic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_Topic.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label_Topic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(74)))), ((int)(((byte)(154)))));
-            this.label_Topic.Location = new System.Drawing.Point(510, 0);
-            this.label_Topic.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_Topic.Name = "label_Topic";
-            this.label_Topic.Size = new System.Drawing.Size(66, 41);
-            this.label_Topic.TabIndex = 6;
-            this.label_Topic.Text = "Тема:";
-            this.label_Topic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(119F, 119F);
@@ -501,9 +500,8 @@ namespace MassMailer
             this.tLP_Bottom.ResumeLayout(false);
             this.tLP_Top.ResumeLayout(false);
             this.tLP_Top.PerformLayout();
+            this.tableLP_TopLeft.ResumeLayout(false);
             this.tLP_html.ResumeLayout(false);
-            this.tLP_Middle.ResumeLayout(false);
-            this.tLP_Middle.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -532,10 +530,10 @@ namespace MassMailer
         private Button button_AttachmentsClear;
         private TextBox textBox_MessageText;
         private Timer timer_LabelShow;
-        private TableLayoutPanel tLP_Middle;
         private Label label_Topic;
         private TextBox textBox_FromWho;
         private Label label_FromWho;
         private TextBox textBox_Topic;
+        private TableLayoutPanel tableLP_TopLeft;
     }
 }

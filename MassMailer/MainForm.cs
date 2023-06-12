@@ -360,7 +360,28 @@ namespace MassMailer
             if (e.Data.GetDataPresent(DataFormats.StringFormat))
                 e.Effect = DragDropEffects.Copy;
         }
-        
+
+        private void textBox_FromWho_DragDrop(object sender, DragEventArgs e)
+        {
+            textBox_FromWho.Text = (string)e.Data.GetData(DataFormats.StringFormat);
+        }
+
+        private void textBox_FromWho_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+                e.Effect = DragDropEffects.Copy;
+        }
+        private void textBox_ToWhom_DragDrop(object sender, DragEventArgs e)
+        {
+            textBox_Topic.Text = (string)e.Data.GetData(DataFormats.StringFormat);
+        }
+
+        private void textBox_ToWhom_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+                e.Effect = DragDropEffects.Copy;
+        }
+
         private void recipients_DragEnter(object sender, DragEventArgs e)
         {
             bool isStringFormat = e.Data.GetDataPresent(DataFormats.StringFormat);
