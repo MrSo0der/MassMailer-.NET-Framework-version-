@@ -11,7 +11,6 @@ namespace MassMailer
     internal class SMTPBrains
     {
         private static SmtpClient client = new SmtpClient();
-        private static bool successfullConnection = false;
         private static string loginEmail = "";
         private static List<Dictionary<string, string>> userList;
         private static int usersCount = 0;
@@ -20,12 +19,11 @@ namespace MassMailer
         {
             try
             {
-                if (!successfullConnection)
+                if (!client.IsConnected)
                 {
                     client.Connect("smtp.yandex.ru", 465, true);
-                    successfullConnection = true;
                 }
-                //"MrSo0der@yandex.ru", "iqzxcnyanqfqobaq"
+                //"KursachTest@yandex.ru", "hrqneoiuwramhipy"
                 client.Authenticate(login, password);
                 loginEmail = login;
                 return 0; // success
