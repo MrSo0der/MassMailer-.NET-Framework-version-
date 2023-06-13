@@ -43,7 +43,7 @@ namespace MassMailer
             this.tLP_Top = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_Topic = new System.Windows.Forms.TextBox();
             this.label_Topic = new System.Windows.Forms.Label();
-            this.tableLP_TopLeft = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLP_TopRight = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox_Recipients = new System.Windows.Forms.ComboBox();
             this.button_RecipientsClear = new System.Windows.Forms.Button();
             this.button_RecipientsFile = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@ namespace MassMailer
             this.tLP_Main.SuspendLayout();
             this.tLP_Bottom.SuspendLayout();
             this.tLP_Top.SuspendLayout();
-            this.tableLP_TopLeft.SuspendLayout();
+            this.tableLP_TopRight.SuspendLayout();
             this.tLP_html.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,7 +193,7 @@ namespace MassMailer
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tLP_Top.Controls.Add(this.textBox_Topic, 3, 1);
             this.tLP_Top.Controls.Add(this.label_Topic, 2, 1);
-            this.tLP_Top.Controls.Add(this.tableLP_TopLeft, 3, 0);
+            this.tLP_Top.Controls.Add(this.tableLP_TopRight, 3, 0);
             this.tLP_Top.Controls.Add(this.textBox_Recipient, 0, 0);
             this.tLP_Top.Controls.Add(this.textBox_FromWho, 1, 1);
             this.tLP_Top.Controls.Add(this.label_ToWhom, 0, 0);
@@ -234,24 +234,24 @@ namespace MassMailer
             this.label_Topic.Text = "Тема:";
             this.label_Topic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tableLP_TopLeft
+            // tableLP_TopRight
             // 
-            this.tableLP_TopLeft.ColumnCount = 4;
-            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLP_TopLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLP_TopLeft.Controls.Add(this.comboBox_Recipients, 0, 0);
-            this.tableLP_TopLeft.Controls.Add(this.button_RecipientsClear, 3, 0);
-            this.tableLP_TopLeft.Controls.Add(this.button_RecipientsFile, 2, 0);
-            this.tableLP_TopLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLP_TopLeft.Location = new System.Drawing.Point(618, 0);
-            this.tableLP_TopLeft.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLP_TopLeft.Name = "tableLP_TopLeft";
-            this.tableLP_TopLeft.RowCount = 1;
-            this.tableLP_TopLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLP_TopLeft.Size = new System.Drawing.Size(368, 41);
-            this.tableLP_TopLeft.TabIndex = 5;
+            this.tableLP_TopRight.ColumnCount = 4;
+            this.tableLP_TopRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLP_TopRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLP_TopRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLP_TopRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLP_TopRight.Controls.Add(this.comboBox_Recipients, 0, 0);
+            this.tableLP_TopRight.Controls.Add(this.button_RecipientsClear, 3, 0);
+            this.tableLP_TopRight.Controls.Add(this.button_RecipientsFile, 2, 0);
+            this.tableLP_TopRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLP_TopRight.Location = new System.Drawing.Point(618, 0);
+            this.tableLP_TopRight.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLP_TopRight.Name = "tableLP_TopRight";
+            this.tableLP_TopRight.RowCount = 1;
+            this.tableLP_TopRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLP_TopRight.Size = new System.Drawing.Size(368, 41);
+            this.tableLP_TopRight.TabIndex = 5;
             // 
             // comboBox_Recipients
             // 
@@ -500,7 +500,7 @@ namespace MassMailer
             this.tLP_Bottom.ResumeLayout(false);
             this.tLP_Top.ResumeLayout(false);
             this.tLP_Top.PerformLayout();
-            this.tableLP_TopLeft.ResumeLayout(false);
+            this.tableLP_TopRight.ResumeLayout(false);
             this.tLP_html.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -534,6 +534,6 @@ namespace MassMailer
         private TextBox textBox_FromWho;
         private Label label_FromWho;
         private TextBox textBox_Topic;
-        private TableLayoutPanel tableLP_TopLeft;
+        private TableLayoutPanel tableLP_TopRight;
     }
 }
